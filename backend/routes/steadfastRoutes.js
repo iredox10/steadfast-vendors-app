@@ -4,7 +4,7 @@ const route = express.Router()
 
 route.post('/add-admin', controller.add_admin)
 
-route.get('/get-admin', controller.get_admin)
+route.post('/login', controller.logIn)
 
 
 

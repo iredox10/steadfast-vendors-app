@@ -1,29 +1,34 @@
-import mongoose from 'mongoose'
+import {Sequelize, Model, DataTypes } from "sequelize"
+import {sequelize} from '../config/connectMysql.js'
 
-const steadfast = new mongoose.Schema({
-    firstName:{
-        type: String,
-        required: true
+const Steadfast = sequelize.define('Steadfast',
+  {
+    // id: {
+    //   type: DataTypes.UUID,
+    //   primaryKey: true,
+    //   // autoIncrement: true,
+    // },
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    lastName:{
-        type: String,
-        required: true
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    email:{
-        type: String,
-        required: true,
-        unique: true
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
     },
-    password:{
-        type: String,
-        required: true
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    vendors:[{
-        type: mongoose.Types.ObjectId,
-        ref: 'vendors'
-    }]
+  }
+)
 
-},{timestamp:true})
+// Create the table in the database (if it doesn't exist)
+Steadfast.sync()
 
-const Steadfast = mongoose.model('steadfast',steadfast)
 export default Steadfast
