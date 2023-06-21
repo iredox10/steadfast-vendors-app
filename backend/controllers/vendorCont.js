@@ -14,19 +14,18 @@ export const register = async (req, res, next) => {
     if (!validEmail) {
       throw new Error("Email is invalid")
     }
+    const steadfast = await Steadfast.findByPk(req.params.id)
     const vendor = await Vendor.create({
+      steadfastId: req.body.steadfastId,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
       password: hashPassword,
     })
-    const steadfast = await Steadfast.findById(req.params.id)
-    steadfast.vendors.push(vendor)
-    await steadfast.save()
-    const jwt = signJwt({id:customer._id,email:customer.email})
+    const jwt = signJwt({id:vendor.id,email:vendor.email})
     res.status(201).json({ vendor,jwt, steadfast })
   } catch (err) {
-    res.status(400).json(err.message)
+    res.status(400).json(err)
   }
 }
 export const logIn = async (req, res, next) => {

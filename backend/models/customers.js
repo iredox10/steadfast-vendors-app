@@ -1,36 +1,33 @@
-import mongoose from "mongoose"
+import { Model, DataTypes } from "sequelize"
+import { sequelize } from "../config/connectMysql.js"
 
-const customer = new mongoose.Schema(
-  {
-    firstName: {
-      type: String,
-      required: true,
-    },
-    lastName: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-      unique: true
-    },
-    state: {
-      type: String,
-      required: true,
-    },
-    phoneNumber: {
-      type: Number,
-      required: true,
-      unique: true
-    },
-    password: {
-      type: String,
-      required: true,
-    },
+const Customer = sequelize.define("customer", {
+  firstName: {
+    type: DataTypes.STRING,
+    allowNull: false,
   },
-  { timestamp: true }
-)
+  lastName: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  state: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  phoneNumber: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  password: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+})
 
-const Customer = mongoose.model("customer", customer)
+Customer.sync()
+
 export default Customer

@@ -26,9 +26,8 @@ export const add_admin = async (req, res) => {
 
 export const logIn = async (req, res, next) => {
   try {
-    const steadfast = await Steadfast.findOne({
-      email: req.body.email,
-    })
+    const steadfast = await Steadfast.findOne({where:{
+      email: req.body.email,},include:['vendors']})
     if (steadfast) {
       const passwordMatch = await bcrypt.compare(
         req.body.password,
@@ -38,7 +37,7 @@ export const logIn = async (req, res, next) => {
     } else {
       throw new Error("user not found!")
     }
-    const jwt = signJwt({ id: steadfast._id, email: steadfast.email })
+    const jwt = signJwt({ id: steadfast.id, email: steadfast.email })
     res.status(200).json({ steadfast, jwt })
   } catch (err) {
     res.status(400).json(err.message)
