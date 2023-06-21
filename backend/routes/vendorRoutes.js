@@ -4,13 +4,15 @@ import verifyAdmin from '../utils/verifyAdmin.js'
 
 const vendorRoute = express.Router()
 
-vendorRoute.post('/register/:id', controller.register)
+vendorRoute.post('/register', controller.register)
 
-vendorRoute.post('/login/', controller.logIn)
+vendorRoute.post('/login', controller.logIn)
 
-vendorRoute.get('/get-vendor/:id',verifyAdmin, controller.get_vendor)
+vendorRoute.get('/get-vendor/:id', controller.get_vendor)
 
 vendorRoute.get('/get-vendors/',verifyAdmin,controller.get_vendors)
+
+vendorRoute.patch('/update-vendor/:id',controller.update_vendor)
 
 
 export default vendorRoute

@@ -2,6 +2,10 @@ import { Model, DataTypes } from "sequelize"
 import { sequelize } from "../config/connectMysql.js"
 
 const Customer = sequelize.define("customer", {
+  vendorId: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
   firstName: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -19,11 +23,11 @@ const Customer = sequelize.define("customer", {
     allowNull: false,
   },
   phoneNumber: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.BIGINT,
     allowNull: false,
   },
   password: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false,
   },
 })

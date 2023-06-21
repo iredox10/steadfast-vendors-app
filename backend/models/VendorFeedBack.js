@@ -1,24 +1,29 @@
 import {Model,DataTypes} from 'sequelize'
 import { sequelize } from '../config/connectMysql.js'
 
-const Services = sequelize.define('service',{
+const Feedback = sequelize.define('feedback',{
     vendorId:{
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    icon: {
+    name:{
         type: DataTypes.STRING,
         allowNull: false
     },
-    title: {
+    email:{
         type: DataTypes.STRING,
         allowNull: false
     },
-    text: {
+    subject:{
         type: DataTypes.STRING,
+        allowNull: false
+    },
+    message:{
+        type: DataTypes.TEXT,
         allowNull: false
     }
 })
 
-Services.sync()
-export default Services
+Feedback.sync()
+
+export default Feedback
