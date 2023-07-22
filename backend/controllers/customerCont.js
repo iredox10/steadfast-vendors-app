@@ -3,6 +3,7 @@ import bcrypt from "bcrypt"
 import Customer from "../models/customers.js"
 import Vendor from "../models/vendor.js"
 import signJwt from "../utils/jwt.js"
+import BankInfo from "../models/CustomerBank.js"
 
 export const register = async (req, res) => {
   const validEmail = validator.isEmail(req.body.email)
@@ -14,8 +15,8 @@ export const register = async (req, res) => {
     const vendor = await Vendor.findByPk(req.params.id)
     const customer = await Customer.create({
       vendorId: vendor.id,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
+      fullName: req.body.fullName,
+      username:req.body.username,
       email: req.body.email,
       state: req.body.state,
       phoneNumber: req.body.phoneNumber,
@@ -24,15 +25,14 @@ export const register = async (req, res) => {
     const jwt = signJwt({ id: customer.id, email: customer.email })
     res.status(201).json({ customer, jwt, vendor })
   } catch (err) {
-    res.status(400).json(err)
+    res.status(400).json(err.message)
   }
 }
 
 export const logIn = async (req, res, next) => {
   try {
-    const customer = await Customer.findOne({
-      phoneNumber: req.body.phoneNumber,
-    })
+
+    const customer = await Customer.findOne({where: {username: req.body.username}})
     if (customer) {
       const passwordMatch = await bcrypt.compare(
         req.body.password,
@@ -42,7 +42,7 @@ export const logIn = async (req, res, next) => {
     } else {
       throw new Error("user not found!")
     }
-   const jwt=  signJwt({id:customer._id, email:customer.email})
+   const jwt=  signJwt({id:customer.id, email:customer.email})
     res.status(200).json({customer,jwt})
   } catch (err) {
     res.status(400).json(err.message)
@@ -67,3 +67,23 @@ export const get_customer = async (req, res) => {
   }
 }
 
+//! separate table for bank details
+export const add_bank_detail = async (req, res) => {
+  try{
+    const bankInfo = await BankInfo.create(req.body)
+    res.status(201).json(bankInfo)
+  }catch(err){
+    res.status(400).json(err)
+  }
+}
+
+export const edit_bank_detail = async (req, res) => {
+  try{
+    const bankInfo = await BankInfo.update({
+      where: {customerId: req.params.id}
+    })
+    res.status(201).json(bankInfo)
+  }catch(err){
+    res.status(400).json(err)
+  }
+}

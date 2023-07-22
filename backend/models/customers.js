@@ -4,13 +4,13 @@ import { sequelize } from "../config/connectMysql.js"
 const Customer = sequelize.define("customer", {
   vendorId: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: false,
   },
-  firstName: {
+  fullName: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  lastName: {
+  username: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -29,6 +29,26 @@ const Customer = sequelize.define("customer", {
   password: {
     type: DataTypes.STRING,
     allowNull: false,
+  },
+  bankName: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  bankAccountName: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  bankAccountNumber: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  pin: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+  walletBalance: {
+    type: DataTypes.STRING,
+    allowNull: true,
   },
 })
 

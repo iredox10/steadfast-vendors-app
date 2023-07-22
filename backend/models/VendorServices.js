@@ -1,24 +1,24 @@
 import {Model,DataTypes} from 'sequelize'
 import { sequelize } from '../config/connectMysql.js'
+import Vendor from './vendor.js'
+import VendorService from './services.js'
 
-const Services = sequelize.define('service',{
+const SelectedServices = sequelize.define('selectedService',{
     vendorId:{
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    icon: {
-        type: DataTypes.STRING,
+    service:{
+        type:DataTypes.INTEGER,
         allowNull: false
     },
-    title: {
-        type: DataTypes.STRING,
+    desc:{
+        type:DataTypes.INTEGER,
         allowNull: false
     },
-    text: {
-        type: DataTypes.STRING,
-        allowNull: false
-    }
 })
 
-Services.sync()
-export default Services
+SelectedServices.sync()
+
+
+export default SelectedServices
