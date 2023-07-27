@@ -13,6 +13,7 @@ import Pricing from './pages/Pricing'
 import Products from './pages/Products'
 import Services from './pages/Services'
 import CustomerDashboard from './pages/CustomerDashboard'
+import { Plans } from './pages/Plans'
 function App() {
   return (
     <>
@@ -33,6 +34,7 @@ function App() {
         <Route path='/customers/:id' element={<Customers/>}/>
         <Route path='/feedback/:id' element={<Feedback/>}/>
         <Route path='/pricing/:id' element={<Pricing/>}/>
+        <Route path='/plans/:vendorId/:serviceId' element={<Plans/>}/>
         <Route path='/services/:id' element={<Services/>}/>
         <Route path='/products/:id' element={<Products/>}/>
 

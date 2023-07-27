@@ -14,15 +14,16 @@ import Footer from '../components/Footer'
 const Vendor = () => {
     const {id} = useParams()
     const {data:vendor,error,loading} = UseFetch(`${path}/vendor/get-vendor/${id}}`)
-    console.log(vendor);
+    const {data:services,error:err,loading:pending} = UseFetch(`${path}/vendor/get-data-services/${id}`)
+
   return (
     <>
     {vendor && 
     <div>
     <Nav bgColor={vendor.primaryColor} secondaryColor={vendor.secondaryColor} tertiaryColor={vendor.tertiaryColor}/>
     <Main bgColor={vendor.primaryColor} secondaryColor={vendor.secondaryColor} tertiaryColor={vendor.tertiaryColor} companyName={vendor.companyName} about={vendor.about}  />
-    <Services primaryColor={vendor.primaryColor} secondaryColor={vendor.secondaryColor} tertiaryColor={vendor.tertiaryColor} />
-    <Prices primaryColor={vendor.primaryColor} secondaryColor={vendor.secondaryColor} tertiaryColor={vendor.tertiaryColor} />
+    <Services id={id} services={services} primaryColor={vendor.primaryColor} secondaryColor={vendor.secondaryColor} tertiaryColor={vendor.tertiaryColor} />
+    <Prices services={services} id={id} primaryColor={vendor.primaryColor} secondaryColor={vendor.secondaryColor} tertiaryColor={vendor.tertiaryColor} />
     <About about={vendor.about} primaryColor={vendor.primaryColor} secondaryColor={vendor.secondaryColor} tertiaryColor={vendor.tertiaryColor} />
     <Contact contactEmail={vendor.contactEmail} contactAddress={vendor.contactAddress} contactNumber={vendor.contactNumber} id={id} primaryColor={vendor.primaryColor} secondaryColor={vendor.secondaryColor} tertiaryColor={vendor.tertiaryColor} />
     <Footer textColor={vendor.textColor} companyName={vendor.companyName}  primaryColor={vendor.primaryColor} secondaryColor={vendor.secondaryColor} tertiaryColor={vendor.tertiaryColor} />

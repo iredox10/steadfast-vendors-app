@@ -7,6 +7,7 @@ import Service from './services.js'
 import Product from './products.js'
 import SelectedServices from "./VendorServices.js"
 import DataService from "./VendorDataServices.js"
+import DataPlan from "./vendorDataPlans.js"
 
 const Vendor = sequelize.define("vendor", {
   firstName: {
@@ -88,6 +89,8 @@ SelectedServices.belongsTo(Vendor)
 Vendor.hasMany(DataService, {foreignKey: 'vendorId'})
 DataService.belongsTo(Vendor)
 
+// Vendor.hasMany(DataPlan, {foreignKey: 'vendorId'})
+// DataPlan.belongsTo(Vendor)
 
 // Create the table in the database (if it doesn't exist)
 Vendor.sync()

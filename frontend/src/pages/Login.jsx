@@ -26,14 +26,9 @@ const Login = () => {
     try {
       const res = await axios.post(`${path}/vendor/login`, { email, password })
       navigate(`/customize/${res.data.vendor.id}`)
-      // if(res.data.vendor.about === null || res.data.vendor.primaryColor === null ||res.data.vendor.secondaryColor === null || res.data.vendor.companyName === null){
-      //     navigate(`/customize/${res.data.vendor.id}`)
-      // }else{
-      //     navigate(`/vendor/${res.data.vendor.id}`)
-      // }
       console.log(res.data)
     } catch (error) {
-      console.log(error)
+      setErr(error.response.data)
     }
   }
 

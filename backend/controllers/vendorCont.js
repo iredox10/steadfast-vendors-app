@@ -24,6 +24,10 @@ export const register = async (req, res, next) => {
     const jwt = signJwt({ id: vendor.id, email: vendor.email })
     res.status(201).json({ vendor, jwt })
   } catch (err) {
+      let error
+      // if(err.data.name === "SequelizeUniqueConstraintError"){
+      //   error = 'email already exist'
+      // }
     res.status(400).json(err)
   }
 }
@@ -134,11 +138,12 @@ export const get_services = async (req, res) => {
 
 export const add_data_service = async (req,res) =>{
   try {
+    const url = req.protocol + '://' + req.get('host')
     const vendor = await Vendor.findByPk(req.params.id)
     const dataService = await DataService.create({
       vendorId:vendor.id,
       name: req.body.name,
-      logo: req.body.logo
+      logo: url + '/' + req.file.filename
     })
     res.status(201).json({dataService,vendor})
   } catch (err) {
@@ -169,6 +174,7 @@ export const add_data_plan = async (req,res) =>{
         limit: req.body.limit
     })
     res.status(201).json(dataPlan)
+    // res.json('hello')
   } catch (err) {
     res.status(400).json(err.message)    
   }
@@ -177,9 +183,19 @@ export const add_data_plan = async (req,res) =>{
 export const get_data_plans = async(req,res) =>{
   try {
     const vendor = await Vendor.findByPk(req.params.vendorId)
-    const dataService = await DataService.findByPk(req.params.serviceId)
+    const dataService = await DataService.findByPk(req.params.serviceId,{include:["dataPlans"]})
 
-    const dataPlans = await DataPlan.findAll({where:{vendorId:vendor.id,dataServiceId:dataService.id}})
+    res.status(200).json({dataService})
+  } catch (err) {
+    res.status(400).json(err)
+  }
+}
+
+
+export const get_data_plans_by_vendor = async(req,res) =>{
+  try {
+    const vendor = await Vendor.findByPk(req.params.vendorId)
+    const dataPlans = await DataService.findAll({where:{vendorId:vendor.id}, include:["dataPlans"]})
     res.status(200).json(dataPlans)
   } catch (err) {
     res.status(400).json(err)

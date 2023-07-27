@@ -21,6 +21,7 @@ const Feedback = () => {
                     <th className='border'>email</th>
                     <th className='border'>subject</th>
                     <th className='border'>message</th>
+                    <th className='border'>date</th>
                   </tr>
                 </thead>
           {feedbacks && feedbacks.feedbacks.map(feedback => (
@@ -31,6 +32,7 @@ const Feedback = () => {
                   <td className='border p-2 capitalize '>{feedback.email}</td>
                   <td className='border p-2 capitalize '>{feedback.subject}</td>
                   <td className='border p-2 capitalize '>{feedback.message}</td>
+                  <td className='border p-2 capitalize '>{feedback.createdAt}</td>
                 </tr>
               </tbody>
             </>

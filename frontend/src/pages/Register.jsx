@@ -49,7 +49,8 @@ const Register = () => {
       })
       navigate(`/customize/${res.data.vendor.id}`)
     } catch (error) {
-      console.log(error.code)
+      setErr(error.response.data.errors[0].message)
+      console.log(error.response.data.errors[0].message)
     }
   }
 

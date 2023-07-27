@@ -19,7 +19,7 @@ const DataService = sequelize.define('dataService',{
 
 
 DataService.hasMany(DataPlan, {foreignKey: 'dataServiceId'})
-
+DataPlan.belongsTo(DataService)
 DataService.sync()
 
 export default DataService

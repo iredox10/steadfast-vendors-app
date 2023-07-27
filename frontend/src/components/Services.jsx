@@ -1,8 +1,11 @@
 import React from "react"
 import Header from "./Header"
 import styled from "styled-components"
+import path from "../utils/path"
+import { Link } from "react-router-dom"
+import UseFetch from "../hooks/UseFetch"
 
-const Services = ({ primaryColor, secondaryColor, tertiaryColor }) => {
+const Services = ({id,services, primaryColor, secondaryColor, tertiaryColor }) => {
   const Wrapper = styled.div`
     background-color: ${primaryColor};
     min-height: 60vh;
@@ -11,6 +14,8 @@ const Services = ({ primaryColor, secondaryColor, tertiaryColor }) => {
   const Container = styled.div`
     display: flex;
   `
+
+
   return (
     <div id="services">
       <Header
@@ -20,7 +25,9 @@ const Services = ({ primaryColor, secondaryColor, tertiaryColor }) => {
         tertiaryColor={tertiaryColor}
       />
       <Wrapper>
-        <Container></Container>
+        <Container>
+          
+        </Container>
       </Wrapper>
     </div>
   )
