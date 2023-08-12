@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import UseFetch from "../hooks/UseFetch"
 import path from "../utils/path"
 import Header from "./Header"
 import styled from "styled-components"
 import { FaShoppingBasket } from "react-icons/fa"
 
-const Prices = ({id,services,primaryColor,secondaryColor,tertiaryColor}) => {
+const Prices = ({vendorId,user,services,bgColor,primaryColor,secondaryColor,tertiaryColor}) => {
   const Wrapper = styled.div`
     /* background-color: ${primaryColor}; */
     min-height: 60vh;
@@ -16,8 +16,16 @@ const Prices = ({id,services,primaryColor,secondaryColor,tertiaryColor}) => {
     display: flex;
   `
 
-const {data:dataServices,error,loading} = UseFetch(`${path}/vendor/get-data-plans-by-vendor/${id}`)
-console.log(dataServices);
+const {data:dataServices,error,loading} = UseFetch(`${path}/vendor/get-data-plans-by-vendor/${vendorId}`)
+const navigate = useNavigate()
+const buyAirtime = () => {
+  if(user){
+    navigate(`/customer-dashboard/${user.id}`)
+  }else{
+    navigate(`/customer-login/${vendorId}`, {state:{ bgColor, secondaryColor}})
+  }
+}
+
 
   return (
     <>
@@ -44,7 +52,7 @@ console.log(dataServices);
                     <p className="text-center font-bold">{plan.limit}</p>
                   </div>
                 ))}
-                <Link to="/" className="flex gap-2 capitalize"><FaShoppingBasket /> buy</Link>
+                <button onClick={buyAirtime} className="flex gap-2 capitalize"><FaShoppingBasket /> buy</button>
               </div>
             </div>
           ))}

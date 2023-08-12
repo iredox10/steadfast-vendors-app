@@ -1,8 +1,10 @@
-import React, { useRef, useState } from "react"
+import React, { useContext, useRef, useState } from "react"
 import axios from "axios"
 import { useLocation, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import path from "../utils/path"
+import { AuthContext } from "../context/AuthContext"
+import { UseAuthContext } from "../hooks/useAuthContext"
 
 const CustomerLogin = () => {
   const location = useLocation()
@@ -12,7 +14,7 @@ const CustomerLogin = () => {
 
   const username = useRef("")
   const password = useRef("")
-
+  const {dispatch} = UseAuthContext()
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (username.current.value === "" || password.current.value === "") {
@@ -25,6 +27,8 @@ const CustomerLogin = () => {
         password: password.current.value,
       })
       const customerId = res.data.customer.id
+      localStorage.setItem('user',JSON.stringify(res.data.customer))
+      dispatch({type:"LOGIN", payload: res.data.customer})
       navigate(`/customer-dashboard/${customerId}`)
     } catch (err) {
       alert(err.response.data)

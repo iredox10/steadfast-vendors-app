@@ -1,9 +1,19 @@
 import React from "react"
-import { Link, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import styled from "styled-components"
 import illustration from "../assets/illustration.svg"
+import { UseAuthContext } from "../hooks/useAuthContext"
 
-const Main = ({ bgColor,secondaryColor,tertiaryColor, companyName, about }) => {
+const Main = ({
+  vendorId,
+  dispatch,
+  user,
+  bgColor,
+  secondaryColor,
+  tertiaryColor,
+  companyName,
+  about,
+}) => {
   const Section = styled.div`
     background-color: ${bgColor};
     display: flex;
@@ -15,7 +25,7 @@ const Main = ({ bgColor,secondaryColor,tertiaryColor, companyName, about }) => {
   `
   const Text = styled.div`
     flex-basis: 45%;
-    @media (max-width: 800px){
+    @media (max-width: 800px) {
       flex-basis: 100%;
       text-align: center;
     }
@@ -26,9 +36,9 @@ const Main = ({ bgColor,secondaryColor,tertiaryColor, companyName, about }) => {
     text-transform: capitalize;
     font-weight: bold;
     font-size: 5rem;
-    @media (max-width:800px) {
-     font-size: 3rem;
-     margin: 1rem 0;
+    @media (max-width: 800px) {
+      font-size: 3rem;
+      margin: 1rem 0;
     }
   `
   const Welcome = styled.h2`
@@ -44,14 +54,14 @@ const Main = ({ bgColor,secondaryColor,tertiaryColor, companyName, about }) => {
   const Links = styled.div`
     display: flex;
     gap: 1rem;
-    margin:1rem 0;
+    margin: 1rem 0;
     @media (max-width: 800px) {
       /* display: none; */
       justify-content: center;
     }
   `
   const ImageContainer = styled.div`
-  @media (max-width: 800px) {
+    @media (max-width: 800px) {
       display: none;
     }
   `
@@ -60,27 +70,36 @@ const Main = ({ bgColor,secondaryColor,tertiaryColor, companyName, about }) => {
     width: 100%;
   `
 
-  const LoginBtn = styled.button` 
+  const LoginBtn = styled.button`
     text-transform: capitalize;
-    padding: .5rem 1rem;
+    padding: 0.5rem 1rem;
     background-color: ${secondaryColor};
-    border-radius: .4rem;
-    &:hover{
+    border-radius: 0.4rem;
+    &:hover {
       color: white;
     }
-    
   `
   const RegisterBtn = styled.button`
     text-transform: capitalize;
-    padding: .5rem 1rem;
+    padding: 0.5rem 1rem;
     border: 2px solid ${secondaryColor};
-    border-radius: .4rem;
-    &:hover{
+    border-radius: 0.4rem;
+    &:hover {
       color: white;
     }
   `
-
   const { id } = useParams()
+
+  
+
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    localStorage.removeItem("user")
+    dispatch({ type: "LOGOUT" })
+    navigate(`/vendor/${vendorId}`)
+  }
+
 
   return (
     <Section>
@@ -88,10 +107,37 @@ const Main = ({ bgColor,secondaryColor,tertiaryColor, companyName, about }) => {
         <Welcome>Welcome to</Welcome>
         <Title>{companyName}</Title>
         <About>{about}</About>
-        <Links>
-         <RegisterBtn> <Link to={`/customer-register/${id}`} state={{bgColor,secondaryColor}}>register</Link></RegisterBtn>
-         <LoginBtn> <Link to={`/customer-login/${id}`} state={{bgColor,secondaryColor}}> login</Link> </LoginBtn>
-        </Links>
+        {user ? (
+          <Links>
+            <RegisterBtn onClick={handleLogout}>logout</RegisterBtn>
+            <LoginBtn>
+              {" "}
+              <Link to={`/customer-dashboard/${user.id}`}> Dashboard</Link>{" "}
+            </LoginBtn>
+          </Links>
+        ) : (
+          <Links>
+            <RegisterBtn>
+              {" "}
+              <Link
+                to={`/customer-register/${id}`}
+                state={{ bgColor, secondaryColor }}
+              >
+                register
+              </Link>
+            </RegisterBtn>
+            <LoginBtn>
+              {" "}
+              <Link
+                to={`/customer-login/${id}`}
+                state={{ bgColor, secondaryColor }}
+              >
+                {" "}
+                login
+              </Link>{" "}
+            </LoginBtn>
+          </Links>
+        )}
       </Text>
       <ImageContainer>
         <Logo

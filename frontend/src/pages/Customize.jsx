@@ -48,6 +48,18 @@ const Customize = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    const data = new FormData()
+    data.append('primaryColor', primaryColor)
+    data.append('secondaryColor', secondaryColor)
+    data.append('tertiaryColor', tertiaryColor)
+    data.append('textColor', textColor)
+    data.append('companyName', companyName)
+    data.append('contactEmail', contactEmail)
+    data.append('contactNumber', contactNumber)
+    data.append('contactAddress', contactAddress)
+    data.append('about', about)
+    data.append('logo', logo)
+    
     if(primaryColor === '' || secondaryColor === '' || tertiaryColor === ''){
         setErr('you can not leave the colors empty')
         return
@@ -64,21 +76,24 @@ const Customize = () => {
       return
     }
     try {
+      // const res = await axios.patch(`${path}/vendor/update-vendor/${id}`, {
+      //   companyName,
+      //   contactEmail,
+      //   contactNumber,
+      //   contactAddress,
+      //   about,
+      //   logo,
+      //   primaryColor,
+      //   secondaryColor,
+      //   tertiaryColor
+      // })
       const res = await axios.patch(`${path}/vendor/update-vendor/${id}`, {
-        companyName,
-        contactEmail,
-        contactNumber,
-        contactAddress,
-        about,
-        logo,
-        primaryColor,
-        secondaryColor,
-        tertiaryColor
+        data
       })
-      console.log(res.data)
+      console.log(res.data);
       const vendor = await axios.get(`${path}/vendor/get-vendor/${id}`)
       console.log(vendor.data)
-        navigate(`/vendor/${id}`)
+        // navigate(`/vendor/${id}`)
       //   setVendor(res.data.vendor)
       setErr("")
     } catch (error) {
@@ -163,6 +178,7 @@ const Customize = () => {
                     type="file"
                     name="logo"
                     id=""
+                    onChange={(e) => setLogo(e.target.files[0])}
                   />
                 </div>
                 <div className="flex items-center justify-between mt-1">

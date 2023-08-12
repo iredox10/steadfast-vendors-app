@@ -5,7 +5,6 @@ import path from '../utils/path'
 const Dashboard = () =>{
     const {id} = useParams()
     const {data:vendor, error, isPending} = UseFetch(`${path}/vendor/get-vendor/${id}`)
-    console.log(vendor)
     return (
         
        <div className=' '>

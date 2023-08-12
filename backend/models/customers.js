@@ -47,8 +47,9 @@ const Customer = sequelize.define("customer", {
     allowNull: true,
   },
   walletBalance: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     allowNull: true,
+    defaultValue: 0,
   },
 })
 

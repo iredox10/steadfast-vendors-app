@@ -7,7 +7,6 @@ const Customers = () => {
     const {id} = useParams()
     const {data:customers,loading,errro}  = UseFetch(`${path}/customer/get-customers/${id}`)
     // console.log(customers.customers)
-
   return (
     <div className="flex gap-5">
         <div>

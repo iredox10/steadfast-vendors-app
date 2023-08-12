@@ -34,7 +34,23 @@ export const register = async (req, res, next) => {
 
 export const update_vendor = async (req, res, next) => {
   try {
-    const vendor = await Vendor.update(req.body, {
+    const url = req.protocol + '://' + req.get('host')
+    const vendor = await Vendor.update({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      logo: url + '/' + req.file.filename,
+      companyName: req.body.companyName,
+      contactEmail: req.body.contactEmail,
+      contactNumber: req.body.contactNumber,
+      contactAddress: req.body.contactAddress,
+      about: req.body.about,
+      subtitle: req.body.subtitle,
+      textColor: req.body.textColor,
+      primaryColor: req.body.primaryColor,
+      secondaryColor: req.body.secondaryColor,
+      tertiaryColor: req.body.tertiaryColor
+    }, {
       where: { id: req.params.id },
     })
     res.status(201).json(vendor)

@@ -13,7 +13,7 @@ vendorRoute.get('/get-vendor/:id', controller.get_vendor)
 
 vendorRoute.get('/get-vendors/',controller.get_vendors)
 
-vendorRoute.patch('/update-vendor/:id',controller.update_vendor)
+vendorRoute.patch('/update-vendor/:id', upload.single('logo'),controller.update_vendor)
 
 vendorRoute.post('/add-service/:id', controller.add_service)
 
@@ -28,6 +28,7 @@ vendorRoute.get('/get-data-services/:id', controller.get_data_services)
 
 vendorRoute.post('/add-data-plan/:vendorId/:serviceId', controller.add_data_plan)
 vendorRoute.get('/get-data-plans/:vendorId/:serviceId', controller.get_data_plans)
+
 vendorRoute.get('/get-data-plans-by-vendor/:vendorId', controller.get_data_plans_by_vendor)
 
 

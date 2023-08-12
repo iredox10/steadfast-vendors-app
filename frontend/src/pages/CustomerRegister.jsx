@@ -4,6 +4,7 @@ import styled from "styled-components"
 import UseFetch from "../hooks/UseFetch"
 import path from "../utils/path"
 import axios from "axios"
+import { UseAuthContext } from "../hooks/useAuthContext"
 
 const CustomerRegister = () => {
   const { id } = useParams()
@@ -15,6 +16,8 @@ const CustomerRegister = () => {
     error,
     isPending,
   } = UseFetch(`${path}/vendor/get-vendor/${id}`)
+
+  const {dispatch} = UseAuthContext()
 
   const fullName = useRef()
   const username = useRef()
@@ -53,6 +56,8 @@ const CustomerRegister = () => {
         password: selectPassword.current.value,
       })
       const customerId = res.data.customer.id
+      localStorage.setItem('user',JSON.stringify(res.data.customer))
+      dispatch({type:"LOGIN", payload: res.data.customer})
       navigate(`/customer-dashboard/${customerId}`)
     } catch (error) {
       console.log(error)

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
-export default function Nav({ bgColor, secondaryColor, tertiaryColor }) {
+import { UseAuthContext } from "../hooks/useAuthContext"
+export default function Nav({vendorId,user, bgColor, secondaryColor, tertiaryColor }) {
   const Div = styled.div`
     background-color: ${bgColor};
     display: flex;
@@ -44,6 +45,17 @@ export default function Nav({ bgColor, secondaryColor, tertiaryColor }) {
       padding: 0.4rem;
     }
   `
+  const DashboardBtn = styled.button`
+  background-color: ${secondaryColor};
+    padding: 1rem;
+    &:hover{
+      color: ${bgColor};
+    }
+    @media (max-width: 800px) {
+      padding: 0.4rem;
+    }
+  `
+
   return (
     <Div>
       <ImageContainer></ImageContainer>
@@ -61,7 +73,7 @@ export default function Nav({ bgColor, secondaryColor, tertiaryColor }) {
           <Link to="">Contact</Link>
         </Button>
         <Container>
-          <GetStartedBtn>Get Started</GetStartedBtn>
+         {user ? <DashboardBtn><Link to={`/customer-dashboard/${user.id}`}>Dashboard</Link></DashboardBtn> : <GetStartedBtn> <Link to={`/customer-register/${vendorId}`}> Get Started </Link></GetStartedBtn>}
         </Container>
       </Links>
     </Div>

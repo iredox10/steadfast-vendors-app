@@ -10,4 +10,6 @@ customerRoute.get('/get-customers/:id', controller.get_customers)
 
 customerRoute.get('/get-customer/:id', controller.get_customer)
 
+customerRoute.patch('/edit-customer/:id', controller.edit_customer)
+
 export default customerRoute

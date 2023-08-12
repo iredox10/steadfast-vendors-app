@@ -26,7 +26,7 @@ const Services = ({id,services, primaryColor, secondaryColor, tertiaryColor }) =
       />
       <Wrapper>
         <Container>
-          
+                
         </Container>
       </Wrapper>
     </div>
