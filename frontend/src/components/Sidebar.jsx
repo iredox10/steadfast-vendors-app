@@ -1,8 +1,7 @@
 import { FaBlog, FaCalendar, FaEnvelope, FaFeather, FaMailchimp, FaMoneyBill, FaPeopleArrows, FaPeopleCarry, FaServicestack, FaUsers } from 'react-icons/fa'
 import {Link} from 'react-router-dom'
 const Sidebar = ({id}) => {
-    return (
-        
+    return (   
         <div className="shadow-lg min-h-[80vh] min-w-[15vw] text-center ">
             <h1 className='underline capitalize font-bold p-2'>company Logo</h1>
             <hr  className=''/>

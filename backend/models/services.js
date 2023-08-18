@@ -1,7 +1,6 @@
 import {DataTypes} from "sequelize";
 import { sequelize } from "../config/connectMysql.js"
-import Product from "./products.js";
-import SelectedServices from "./VendorServices.js"
+
 
 
 const VendorService = sequelize.define('vendorServices',{

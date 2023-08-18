@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 import { UseAuthContext } from "../hooks/useAuthContext"
-export default function Nav({vendorId,user, bgColor, secondaryColor, tertiaryColor }) {
+export default function dNav({vendorId,user, bgColor, secondaryColor, tertiaryColor,logo }) {
   const Div = styled.div`
     background-color: ${bgColor};
     display: flex;
@@ -58,7 +58,9 @@ export default function Nav({vendorId,user, bgColor, secondaryColor, tertiaryCol
 
   return (
     <Div>
-      <ImageContainer></ImageContainer>
+      <ImageContainer>
+        <img src={logo} alt ="logo" />
+      </ImageContainer>
       <Links>
         <Button>
           <Link to="/">Home</Link>

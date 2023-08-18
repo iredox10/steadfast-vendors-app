@@ -1,12 +1,12 @@
 import React, { useContext, useRef, useState } from "react"
 import axios from "axios"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import styled from "styled-components"
 import path from "../utils/path"
-import { AuthContext } from "../context/AuthContext"
 import { UseAuthContext } from "../hooks/useAuthContext"
 
 const CustomerLogin = () => {
+  const {id} = useParams()
   const location = useLocation()
   const { bgColor, secondaryColor } = location.state
 
@@ -22,7 +22,7 @@ const CustomerLogin = () => {
       return
     }
     try {
-      const res = await axios.post(`${path}/customer/login`, {
+      const res = await axios.post(`${path}/customer/login/${id}`, {
         username: username.current.value,
         password: password.current.value,
       })

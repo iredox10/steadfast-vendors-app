@@ -6,6 +6,7 @@ import path from '../utils/path'
 import UseFetch from '../hooks/UseFetch'
 import axios from 'axios'
 import Title from '../components/Title'
+import CustomerHeader from '../components/CustomerHeader'
 
 const CustomerEditProfile = () => {
     const {id} = useParams()
@@ -41,11 +42,13 @@ const CustomerEditProfile = () => {
 
 
   return (
+    <div>
+        <CustomerHeader />
     <div className='flex gap-3'>
 <CustomerSidebar id={id} />
 <div className='m-2 w-full'>
     <Title title={'edit or add bank detail'} />
-    <div>
+    <div className='shadow-lg p-2'>
         <form onSubmit={handleSubmit}>
             <FormInput
             type={'text'}
@@ -70,10 +73,11 @@ const CustomerEditProfile = () => {
             onchange={(e) => setAccountNumber(e.target.value)}
             value={accountNumber}
             />
-            <button type='submit'>edit</button>
+            <button type='submit' className='bg-blue-400 p-2 text-white mt-4 block w-28 capitalize hover:bg-blue-300'>update</button>
         </form>
     </div>
 </div>
+    </div>
     </div>
   )
 }

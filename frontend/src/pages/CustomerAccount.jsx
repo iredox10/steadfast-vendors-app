@@ -5,16 +5,19 @@ import path from '../utils/path'
 import UseFetch from '../hooks/UseFetch'
 import Button from '../components/Button'
 import Title from '../components/Title'
+import CustomerHeader from '../components/CustomerHeader'
 
 const CustomerAccount = () => {
   const {id} = useParams()
   const {data:customer,error,loading} = UseFetch(`${path}/customer/get-customer/${id}`)
   console.log(customer);
   return (
-    <div className='flex gap-3 '>
+    <div>
+      <CustomerHeader />
+    <div className='flex gap-2'>
       <CustomerSidebar id={id}  />
       {customer &&
-      <div className='m-2 p-2 w-full shadow-lg'>
+      <div className='m-2 p-2 w-full shadow-lg my-5 mx-2'>
         <Title title={'profile'} />
         <div className='flex gap-10'>
           <div>
@@ -30,9 +33,10 @@ const CustomerAccount = () => {
           <p className='capitalize my-2'><span className='font-bold'>account number:</span> {customer.bankAccountNumber=== null ? 'empty' :customer.bankAccountNumber}</p>
           </div>
         </div>
-        <Link className='bg-blue-400 p-2 text-white mt-4 block w-28 capitalize hover:bg-blue-300' to={`/customer-edit-profile/${id}`}>edit profile</Link>
+        <Link className='bg-blue-400 p-2 text-white mt-4 block w-32 capitalize hover:bg-blue-300' to={`/customer-edit-profile/${id}`}>update profile</Link>
       </div>
       }
+    </div>
     </div>
   )
 }

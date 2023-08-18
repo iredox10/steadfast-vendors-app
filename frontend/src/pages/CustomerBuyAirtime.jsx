@@ -6,6 +6,7 @@ import UseFetch from "../hooks/UseFetch"
 import path from "../utils/path"
 import { FaExclamation } from "react-icons/fa"
 import Title from "../components/Title"
+import CustomerHeader from "../components/CustomerHeader"
 
 const CustomerBuyAirtime = () => {
   const {id} = useParams()
@@ -29,9 +30,11 @@ const CustomerBuyAirtime = () => {
   }
 
   return (
-    <div className="flex">
+    <div>
+      <CustomerHeader />
+    <div className="flex gap-2">
       <CustomerSidebar id={id}  />
-      <div className="w-full p-2">
+      <div className="w-full p-2 shadow-lg my-5 mx-2 ">
         <Title title={'buy airtime'} />
         <div className="mt-3">
         {msg &&  <div className="text-red-500 text-center font-bold capitalize text-2xl"> {msg}</div> }
@@ -45,7 +48,7 @@ const CustomerBuyAirtime = () => {
             </label>
             <select
               id="network"
-              className="block w-full rounded-lg border border-blue-300 bg-blue-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-blue-600 dark:bg-blue-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+              className="block w-full rounded-lg border border-blue-300 bg-blue-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-blue-500 dark:bg-blue-500 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
               onChange={(e) => setNetwork(e.target.value)}
             >
               <option selected disabled>Choose Network</option>
@@ -67,10 +70,11 @@ const CustomerBuyAirtime = () => {
             placeholder={"amount"}
             onchange={e => setAmount(e.target.value)}
           />
-          <button className="bg-blue-700 text-white w-4/5 my-3 p-2 capitalize font-bold hover:bg-blue-400 block mx-auto">buy now </button>
+          <button className="bg-blue-500 text-white w-4/5 my-3 p-2 capitalize font-bold hover:bg-blue-400 block mx-auto">buy now </button>
         </form>
         </div>
       </div>
+    </div>
     </div>
   )
 }

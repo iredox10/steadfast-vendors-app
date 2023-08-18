@@ -21,7 +21,7 @@ const Services = () => {
     const data = new FormData()
     data.append("name", name)
     data.append("logo", logo)
-
+    console.log(data);
     try {
       const res = await axios.post(
         `${path}/vendor/add-data-service/${id}`,
@@ -48,7 +48,7 @@ const Services = () => {
           services.map((service) => (
             <div
               key={service.id}
-              className=" bg-white text-center shadow-lg"
+              className=" bg-white text-center shadow-lg p-2"
             >
               <div className="w-max-[50%]">
                 <div className="">

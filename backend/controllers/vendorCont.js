@@ -155,13 +155,14 @@ export const get_services = async (req, res) => {
 export const add_data_service = async (req,res) =>{
   try {
     const url = req.protocol + '://' + req.get('host')
-    const vendor = await Vendor.findByPk(req.params.id)
-    const dataService = await DataService.create({
-      vendorId:vendor.id,
-      name: req.body.name,
-      logo: url + '/' + req.file.filename
-    })
-    res.status(201).json({dataService,vendor})
+    // const vendor = await Vendor.findByPk(req.params.id)
+    // const dataService = await DataService.create({
+    //   vendorId:vendor.id,
+    //   name: req.body.name,
+    //   logo: url + '/' + req.file.filename
+    // })
+    // res.status(201).json({dataService,vendor})
+    res.json({body:req.body, url, file: req.file.filename})
   } catch (err) {
     res.status(400).json(err.message)
   }

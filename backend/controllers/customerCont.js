@@ -32,7 +32,7 @@ export const register = async (req, res) => {
 export const logIn = async (req, res, next) => {
   try {
     const customer = await Customer.findOne({
-      where: { username: req.body.username },
+      where: { username: req.body.username, vendorId:req.params.id },
     })
     if (customer) {
       const passwordMatch = await bcrypt.compare(

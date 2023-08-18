@@ -1,7 +1,8 @@
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import UseFetch from '../hooks/UseFetch'
 import path from '../utils/path'
 import CustomerSidebar from '../components/CustomerSidebar'
+import CustomerHeader from '../components/CustomerHeader'
 
 
 
@@ -11,29 +12,27 @@ const CustomerDashboard = () => {
     console.log(customer);
   return (
     <div>
-      <header className='bg-blue-300 md:p-10'>
-        <h1>customer dashboard</h1>
-      </header>
+      {customer && <CustomerHeader customer={customer.username} />}
     {customer &&
-     <div className='flex gap-3 '>
+     <div className='flex gap-2 '>
       <CustomerSidebar id={id} />
-      <div className='flex flex-col w-full '>
-        <div>
-      <h1 className='bg-yellow-300 p-2'>{customer.username} welcome</h1>
+      <div className='flex flex-col w-full mx-2 '>
+        <div className='bg-white shadow-xl w-[95%] md:w-[90%] mx-auto my-5'>
+      <h1 className='capitalize bg-white p-2'>{customer.username} welcome</h1>
       <div>
         <div className= 'bg-yellow-400 capitalize p-2'>
-          <p>good day, {customer.username}</p>
+          <p className='capitalize'>good day, {customer.username}</p>
           <h2 className='text-2xl font-bold my-2' >wallet balance </h2>
           <p className='text-xl md:text-2xl font-bold'>{customer.walletBalance === 0 ? <p>₦ 0</p> : customer.walletBalance}</p>
         </div>
       </div>
-      </div>
-      <div className="">
+      <div className="py-7 px-2">
         <h1>services</h1>
         <div>
           <img src="" alt="" />
-          <p>buy airtime</p>
+          <Link to={`/customer-buy-airtime/${id}`} className=''>buy airtime</Link>
         </div>
+      </div>
       </div>
       </div>
     </div>

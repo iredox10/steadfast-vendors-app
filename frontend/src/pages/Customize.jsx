@@ -27,6 +27,7 @@ const Customize = () => {
   const [secondaryColor, setSecondaryColor] = useState("")
   const [tertiaryColor, setTertiaryColor] = useState("")
   const [textColor, setTextColor] = useState('')
+  const [msg, setMsg] = useState('')
   //   const [vendor, setVendor] = useState(data)
 
   useEffect(() => {
@@ -41,6 +42,7 @@ const Customize = () => {
         setSecondaryColor(vendor.secondaryColor)
         setTertiaryColor(vendor.tertiaryColor)
         setTextColor(vendor.textColor)
+        setLogo(vendor.logo)
       }, 1000)
   }, [vendor])
 
@@ -59,7 +61,7 @@ const Customize = () => {
     data.append('contactAddress', contactAddress)
     data.append('about', about)
     data.append('logo', logo)
-    
+
     if(primaryColor === '' || secondaryColor === '' || tertiaryColor === ''){
         setErr('you can not leave the colors empty')
         return
@@ -76,30 +78,34 @@ const Customize = () => {
       return
     }
     try {
-      // const res = await axios.patch(`${path}/vendor/update-vendor/${id}`, {
-      //   companyName,
-      //   contactEmail,
-      //   contactNumber,
-      //   contactAddress,
-      //   about,
-      //   logo,
-      //   primaryColor,
-      //   secondaryColor,
-      //   tertiaryColor
-      // })
-      const res = await axios.patch(`${path}/vendor/update-vendor/${id}`, {
+      const res = await axios.patch(`${path}/vendor/update-vendor/${id}`, 
         data
-      })
-      console.log(res.data);
-      const vendor = await axios.get(`${path}/vendor/get-vendor/${id}`)
-      console.log(vendor.data)
+      )
+//       setTimeout(async() =>{
+//       setMsg('updated')
+// },1000)
+        console.log(res.data)
         // navigate(`/vendor/${id}`)
-      //   setVendor(res.data.vendor)
+        // setVendor(res.data.vendor)
       setErr("")
     } catch (error) {
       console.log(error)
     }
   }
+
+  // const handleSubmit = async (e) =>{
+  //   e.preventDefault()
+  //   const data = new FormData()
+  //   data.append('companyName', companyName)
+  //   data.append('logo', logo)
+
+  //   try {
+  //     const res = await axios.patch(`${path}/vendor/update-vendor/${id}`,data)
+  //     console.log(res.data);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
 
   return (
     <div>
@@ -133,6 +139,20 @@ const Customize = () => {
                         <label htmlFor="text color">text color: </label>
                         <input type="color" name="text color" id="" value={textColor} onChange={(e)=>setTextColor(e.target.value)} />
                     </div>
+                    <div className="flex item-center">
+                      <div className="flex flex-col">
+                  <label htmlFor="logo">logo</label>
+                  <input
+                    type="file"
+                    name="logo"
+                    id=""
+                    onChange={(e) => setLogo(e.target.files[0])}
+                  />
+                  </div>
+                  <div>
+                  {vendor && <img src={vendor.logo} width='100' height='100' />}
+                  </div>
+                </div>
                 </div>
                 <div>
                 <FormInput
@@ -172,17 +192,8 @@ const Customize = () => {
                     className="w-full border-2 border-blue-500"
                   ></textarea>
                 </div>
-                <div>
-                  <label htmlFor="logo">logo</label>
-                  <input
-                    type="file"
-                    name="logo"
-                    id=""
-                    onChange={(e) => setLogo(e.target.files[0])}
-                  />
-                </div>
                 <div className="flex items-center justify-between mt-1">
-                <FormBtn text={`edit`} />
+                <FormBtn text={`update`} />
                 <Link to={`/vendor/${id}`} className="font-bold capitalize hover:text-blue-700">visit page</Link>
                 </div>
                 </div>

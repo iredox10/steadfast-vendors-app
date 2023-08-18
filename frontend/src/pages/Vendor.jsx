@@ -23,7 +23,7 @@ const Vendor = () => {
     <>
     {vendor && 
     <div>
-    <Nav user={user} vendorId={vendor.id}  bgColor={vendor.primaryColor} secondaryColor={vendor.secondaryColor} tertiaryColor={vendor.tertiaryColor}/>
+    <Nav logo={vendor.logo} user={user} vendorId={vendor.id}  bgColor={vendor.primaryColor} secondaryColor={vendor.secondaryColor} tertiaryColor={vendor.tertiaryColor}/>
     <Main dispatch={dispatch} user={user} vendorId={vendor.id}  bgColor={vendor.primaryColor} secondaryColor={vendor.secondaryColor} tertiaryColor={vendor.tertiaryColor} companyName={vendor.companyName} about={vendor.about}  />
     <Services id={id} services={services} primaryColor={vendor.primaryColor} secondaryColor={vendor.secondaryColor} tertiaryColor={vendor.tertiaryColor} />
     <Prices user={user} vendorId={vendor.id} services={services} bgColor={vendor.primaryColor} id={id} primaryColor={vendor.primaryColor} secondaryColor={vendor.secondaryColor} tertiaryColor={vendor.tertiaryColor} />

@@ -37,7 +37,7 @@ const buyAirtime = () => {
       />
 <Wrapper>
         <Container>
-        <div className='grid grid-cols-4 gap-3 '>
+        <div className='md:w-[80%] mx-auto grid grid-cols-3 gap-3 '>
           {dataServices && dataServices.map(service => (
             <div key={service.id} className='shadow-lg bg-white'>
               <div className='flex flex-col items-center bg-yellow-200'>

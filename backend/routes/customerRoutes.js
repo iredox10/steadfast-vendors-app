@@ -4,7 +4,7 @@ const customerRoute = express.Router()
 
 customerRoute.post('/register/:id',controller.register)
 
-customerRoute.post('/login',controller.logIn)
+customerRoute.post('/login/:id',controller.logIn)
 
 customerRoute.get('/get-customers/:id', controller.get_customers)
 
