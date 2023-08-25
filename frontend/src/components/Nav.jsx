@@ -63,16 +63,16 @@ export default function dNav({vendorId,user, bgColor, secondaryColor, tertiaryCo
       </ImageContainer>
       <Links>
         <Button>
-          <Link to="/">Home</Link>
+          <Link to={`/vendor/${vendorId}`}>Home</Link>
         </Button>
         <Button>
-          <Link to="">Services</Link>
+          <Link to="/service/:id">Services</Link>
         </Button>
         <Button>
-          <Link to="">About</Link>
+          <Link to="/about/:id">About</Link>
         </Button>
         <Button>
-          <Link to="">Contact</Link>
+          <Link to="/contact/:id">Contact</Link>
         </Button>
         <Container>
          {user ? <DashboardBtn><Link to={`/customer-dashboard/${user.id}`}>Dashboard</Link></DashboardBtn> : <GetStartedBtn> <Link to={`/customer-register/${vendorId}`}> Get Started </Link></GetStartedBtn>}

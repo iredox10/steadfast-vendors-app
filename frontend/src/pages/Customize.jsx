@@ -120,6 +120,8 @@ const Customize = () => {
                 <button>logout</button>
               </div>
               <form onSubmit={handleSubmit} >
+                {companyName}
+                {about}
               {err && <p className="text-red-500">{err}</p>}
                     <p className="capitalize font-medium mb-2">select color for your page:</p>
                 <div className="flex gap-3">

@@ -18,9 +18,11 @@ import CustomerAccount  from './pages/CustomerAccount'
 import CustomerFundWallet from './pages/CustomerFundWallet'
 import CustomerBuyAirtime from './pages/CustomerBuyAirtime'
 import CustomerBills from './pages/CustomerBills'
+import CustomerTransactions from './pages/CustomerTransactions'
 import CustomerPricing from './pages/CustomerPricing'
 import CustomerEditProfile from './pages/CustomerEditProfile'
 import { UseAuthContext } from './hooks/useAuthContext'
+
 function App() {
   const {state,dispatch} = UseAuthContext()
   const user = state.payload
@@ -56,6 +58,7 @@ function App() {
         <Route path='/customer-buy-airtime/:id' element={<CustomerBuyAirtime/>}/>
         <Route path='/customer-bills/:id' element={<CustomerBills/>}/>
         <Route path='/customer-pricing/:id' element={<CustomerPricing/>}/>
+        <Route path='/customer-transactions/:id' element={<CustomerTransactions/>}/>
         <Route path='/customer-edit-profile/:id' element={<CustomerEditProfile/>}/>
         </>
         :

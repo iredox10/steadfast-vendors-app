@@ -39,7 +39,7 @@ export const update_vendor = async (req, res, next) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
-      logo: url + '/' + req.file.filename,
+      // logo: url + '/' + req.file.filename,
       companyName: req.body.companyName,
       contactEmail: req.body.contactEmail,
       contactNumber: req.body.contactNumber,
@@ -54,6 +54,7 @@ export const update_vendor = async (req, res, next) => {
       where: { id: req.params.id },
     })
     res.status(201).json(vendor)
+    // res.json(req.body)
   } catch (err) {
     res.json(err)
   }

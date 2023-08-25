@@ -4,6 +4,7 @@ import styled from "styled-components"
 import UseFetch from "../hooks/UseFetch"
 import path from "../utils/path"
 import axios from "axios"
+import Nav from '../components/Nav'
 import { UseAuthContext } from "../hooks/useAuthContext"
 
 const CustomerRegister = () => {
@@ -114,7 +115,8 @@ const CustomerRegister = () => {
     text-transform: capitalize;
     background: ${bgColor};
     padding: 0.5rem 1rem;
-    margin: 1rem 0;
+    width: 80%;
+    margin: 1rem auto;
     color: white;
     &:hover {
       background-color: ${secondaryColor};
@@ -124,6 +126,8 @@ const CustomerRegister = () => {
   return (
     <>
       {vendor && (
+        <div>
+          <Nav logo={vendor.logo}  vendorId={id}  bgColor={bgColor} secondaryColor={secondaryColor} tertiaryColor={vendor.tertiaryColor} />
         <Container>
           <Form onSubmit={handleSubmit}>
             <Title>register</Title>
@@ -186,6 +190,7 @@ const CustomerRegister = () => {
             <Button type="submit">Register</Button>
           </Form>
         </Container>
+        </div>
       )}
     </>
   )

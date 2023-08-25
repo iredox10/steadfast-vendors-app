@@ -3,6 +3,7 @@ import axios from "axios"
 import { useLocation, useNavigate, useParams } from "react-router-dom"
 import styled from "styled-components"
 import path from "../utils/path"
+import Nav from '../components/Nav'
 import { UseAuthContext } from "../hooks/useAuthContext"
 
 const CustomerLogin = () => {
@@ -88,6 +89,8 @@ const CustomerLogin = () => {
   `
 
   return (
+    <div>
+    <Nav  vendorId={id}  bgColor={bgColor} secondaryColor={secondaryColor}  />
     <Container>
       <Form onSubmit={handleSubmit}>
         <Title className="text-center text-2xl text-gray-600">customer login</Title>
@@ -112,6 +115,7 @@ const CustomerLogin = () => {
         <Button type="submit">Login</Button>
       </Form>
     </Container>
+    </div>
   )
 }
 
